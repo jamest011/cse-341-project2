@@ -8,8 +8,8 @@ const getAll = (req,res) => {
     mongodb
         .getDatabase()
         .collection('champions')
-        .find();
-        toArray((err, lists) => {
+        .find()
+        .toArray((err, lists) => {
             if (err) {
                 res.status(400).json({ message: err });
             }
@@ -23,8 +23,8 @@ const getSingle = (req, res) => {
     mongodb
         .getDatabase()
         .collection('champions')
-        .find({ _id: champId});
-        toArray((err, result) => {
+        .find({ _id: champId})
+        .toArray((err, result) => {
             if (err) {
                 res.status(400).json({ message: err });
             }
