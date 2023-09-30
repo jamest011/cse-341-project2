@@ -20,10 +20,12 @@ const getAll = (req,res) => {
 
 const getSingle = (req, res) => {
     //#swagger.tags['Champions']
+    console.log(req.params.id); // added for debugging
+    const champId = new ObjectId(req.params.id);
     mongodb
         .getDatabase()
         .collection('champions')
-        .find({ _id: champId})
+        .find({ _id: champId })
         .toArray((err, result) => {
             if (err) {
                 res.status(400).json({ message: err });
