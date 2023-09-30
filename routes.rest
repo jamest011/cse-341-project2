@@ -3,7 +3,7 @@
  GET http://localhost:3300/champions
 
 ### Get champions by id 
-GET http://localhost:3300/champions/65179fee3f3e663dcb2b09d9  
+GET http://localhost:3300/champions/65177a2979ed287b941161c1  
 ### 65177a2979ed287b941161c1
 
 ### Create champion 
