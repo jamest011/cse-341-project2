@@ -1,3 +1,5 @@
+// Information for League of Legends champions pulled from http://ddragon.leagueoflegends.com/cdn/13.19.1/data/en_US/champion.json
+
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
