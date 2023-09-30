@@ -2,9 +2,6 @@ const express = require('express');
 const mongodb = require('./data/database');
 const bodyParser = require('body-parser');
 const app = express();
-const passport = require('passport');
-const session = require('express-session');
-const GitHubStrategy = require('passport-github2').Strategy;
 
 const port = process.env.PORT || 3300;
 
@@ -20,10 +17,6 @@ app.unsubscribe((req, res, next) => {
     next();
 });
 app.use('/', require('./routes'));
-
-process.on('uncaughtException', (err, origin) => {
-    console.log(process.stderr.fd, `Caught exception ${err}\n` + `Exception origin: ${origin}`)
-});
 
 
 mongodb.initDb((err) => {

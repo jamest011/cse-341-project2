@@ -1,38 +1,25 @@
-// Information for League of Legends Champions pulled from http://ddragon.leagueoflegends.com/cdn/13.19.1/data/en_US/champion.json
+// Information for League of Legends champions pulled from http://ddragon.leagueoflegends.com/cdn/13.19.1/data/en_US/champion.json
 
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
-const getAll = (req,res) => {
+const getAll = async (req,res) => {
     //#swagger.tags['Champions']
-    mongodb
-        .getDatabase()
-        .collection('champions')
-        .find()
-        .toArray((err, lists) => {
-            if (err) {
-                res.status(400).json({ message: err });
-            }
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(lists);
-        });
+    const result = await mongodb.getDatabase().collection('champions').find();
+    result.toArray().then((champions) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(champions);
+    });
 };
 
-const getSingle = (req, res) => {
+const getSingle = async (req, res) => {
     //#swagger.tags['Champions']
-    console.log(req.params.id); // added for debugging
     const champId = new ObjectId(req.params.id);
-    mongodb
-        .getDatabase()
-        .collection('champions')
-        .find({ _id: champId })
-        .toArray((err, result) => {
-            if (err) {
-                res.status(400).json({ message: err });
-            }
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(result[0]);
-        });
+    const result = await mongodb.getDatabase().collection('champions').find( {_id: champId });
+    result.toArray().then((champions) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(champions[0]);
+    });
 };
 
 const createChamp = async (req, res) => {
