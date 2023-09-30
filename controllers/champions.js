@@ -20,7 +20,60 @@ const getSingle = async (req, res) => {
     });
 };
 
+const createChamp = async (req, res) => {
+    //#swagger.tags['Champions']
+    const champ = {
+        name: req.body.name,
+        lane: req.body.lane,
+        type: req.body.type,
+        difficulty: req.body.difficulty,
+        resource: req.body.resource,
+        damage: req.body.damage,
+        number: req.body.number
+    };
+    const response = await mongodb.getDatabase().collection('champions').insertOne(champ);
+    if (response.acknowledged > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occurred while creating the champion.');
+    }
+};
+
+const updateChamp = async (req, res) => {
+    //#swagger.tags['Champions']
+    const champId = new ObjectId(req.params.id);
+    const champ = {
+        name: req.body.name,
+        lane: req.body.lane,
+        type: req.body.type,
+        difficulty: req.body.difficulty,
+        resource: req.body.resource,
+        damage: req.body.damage,
+        number: req.body.number
+    };
+    const response = await mongodb.getDatabase().collection('champions').replaceOne({ _id: champId }, champ);
+    if (response.modifiedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occurred while updating the champion.');
+    }
+};
+
+const deleteChamp = async (req, res) => {
+    //#swagger.tags['Champions']
+    const champId = new ObjectId(req.params.id);
+    const response = await mongodb.getDatabase().collection('champions').deleteOne({ _id: champId });
+    if (response.deletedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occurred while deleting the champion.');
+    }
+};
+
 module.exports = {
     getAll,
-    getSingle
+    getSingle,
+    createChamp,
+    updateChamp,
+    deleteChamp
 };
