@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
         const result = await mongodb.getDatabase().collection('champions').find();
         const champions = await result.toArray();
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(champions);
+        res.status(204).json(champions);
     } catch (error) {
         console.error('Error in getAll:', error);
         res.status(500).json('Internal server error');
@@ -21,7 +21,7 @@ const getSingle = async (req, res) => {
         const result = await mongodb.getDatabase().collection('champions').find({ _id: champId });
         const champions = await result.toArray();
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(champions[0]);
+        res.status(204).json(champions[0]);
     } catch (error) {
         console.error('Error in getSingle:', error);
         res.status(500).json('Internal server error');
