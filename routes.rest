@@ -13,7 +13,7 @@ content-type: application/json
 {
     "name": "Thresh",
     "lane": "Top",
-    "type": ["Support", "Fighter"],
+    "type": "Support",
     "difficulty": "1",
     "resource": "Mana",
     "damage": "Ability Power",
@@ -27,7 +27,7 @@ content-type: application/json
 {
     "name": "Thresh",
     "lane": "Bottom",
-    "type": ["Support", "Fighter"],
+    "type": "Support",
     "difficulty": "7",
     "resource": "Mana",
     "damage": "Ability Power",
