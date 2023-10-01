@@ -1,3 +1,5 @@
+// db info pulled from http://ddragon.leagueoflegends.com/cdn/13.19.1/data/en_US/champion.json
+
 const dotenv = require('dotenv');
 dotenv.config();
 
